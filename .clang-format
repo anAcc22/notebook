@@ -1,0 +1,16 @@
+Language: Cpp
+IndentWidth: 2
+Cpp11BracedListStyle: false
+PointerAlignment: Right
+BreakBeforeBinaryOperators: true
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakTemplateDeclarations: true
+BreakConstructorInitializers: BeforeComma
+PackConstructorInitializers: Never
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AlignConsecutiveAssignments: true
+AlignTrailingComments: Always
+SortIncludes: false
+AlignAfterOpenBracket: AlwaysBreak
+BinPackArguments: false
