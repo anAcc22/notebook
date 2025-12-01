@@ -1,5 +1,9 @@
 // NOTE: formatter (prettypst): https://github.com/antonWetzel/prettypst
-#set page(paper: "a4", flipped: true, margin: 0.5cm, columns: 3)
+#set page(paper: "a4", flipped: true, margin: 0.5cm, columns: 3, header: context [
+  Nanyang Technological University (_Peanut Butter and Neovim_)
+  #h(1fr)
+  #counter(page).display("1")
+])
 #set columns(gutter: 5pt)
 #set text(font: "Alegreya", size: 8pt)
 #set raw(theme: "themes/Lazy.tmTheme")
