@@ -119,6 +119,22 @@ following implementation.
 
 #sourcefile(MATCHING_COLOR, "matching/hopcroft_karp.cpp", showrange: (3, INFI))
 
+=== Minimum Vertex Cover
+
+Assuming you have obtained the matching above, you can retrieve the _minimum vertex
+cover_ (the smallest set of vertices that includes at least one endpoint of every edge of the graph) 
+by constructing a new _directed_ graph. Edges that belong to the matching will go from right to left,
+whereas all other edges will go from left to right. Perform a depth first search starting at
+all left vertices that are not incident to any edges in the matching.
+
+The minimum vertex cover includes all visited right vertices of the matching, as well as all
+unvisited left vertices of the matching.
+
+Note that some problems also have situations where there are isolated nodes (degree zero) that have
+to be taken.
+
+#sourcefile(MATCHING_COLOR, "matching/min_vertex_cover.cpp", showrange: (3, INFI))
+
 == Perfect Matching
 
 A perfect matching is one where every vertex is included in exactly one edge of the
