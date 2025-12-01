@@ -278,6 +278,15 @@ as we go up the centroid decomposition tree.
 
 #sourcefile(GRAPH_COLOR, "graphs/two_sat.cpp", showrange: (3, INFI))
 
+== Small-To-Large Merging
+
+Instead, of each node having its own set of objects, try to reuse the children
+sets as much as possible. This reduces the number of swaps/inserts and improves
+the constant factor. The following snippet solves CSES's Distinct Colors, which asks
+you to find the number of distinct colors in each subtree.
+
+#sourcefile(GRAPH_COLOR, "graphs/small_to_large.cpp", showrange: (5, INFI))
+
 = Flows
 
 == Edmonds-Karp
