@@ -122,7 +122,7 @@ following implementation.
 === Minimum Vertex Cover
 
 Assuming you have obtained the matching above, you can retrieve the _minimum vertex
-cover_ (the smallest set of vertices that includes at least one endpoint of every edge of the graph) 
+cover_ (the smallest set of vertices that includes at least one endpoint of every edge of the graph)
 by constructing a new _directed_ graph. Edges that belong to the matching will go from right to left,
 whereas all other edges will go from left to right. Perform a depth first search starting at
 all left vertices that are not incident to any edges in the matching.
@@ -260,9 +260,19 @@ If you want to update the value of node `u`, you need to update `pos[u]`.
 == Tree Hashing
 
 You can hash a _rooted_ tree like so. If it isn't rooted, you may find a
-centroid first before using it as a root to perform the hash.
+centroid first before using it as a root to perform the hash. Some trees
+may have _two_ centroids, in which case you have to retrieve two hashes. Among
+the two, put the smaller one before the larger one in a pair of integers
+(e.g., in `V<int>`).
 
 #sourcefile(GRAPH_COLOR, "graphs/tree_hashing.cpp", showrange: (87, INFI))
+
+== Centroid Decomposition
+
+`ancestors[u]` returns the list of ancestors of `u` (along with the distance)
+as we go up the centroid decomposition tree.
+
+#sourcefile(GRAPH_COLOR, "graphs/centroid_decomposition.cpp", showrange: (5, INFI))
 
 == 2-SAT
 
