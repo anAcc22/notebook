@@ -95,6 +95,15 @@ Check if two nodes are connected at some point in time.
 
 #sourcefile(DSU_COLOR, "dsu/persistent_dsu.cpp", showrange: (3, INFI))
 
+== Kruskal Reconstruction Tree
+
+This data structure stores the implicit tree formed across `unite` operations.
+`kweight` stores the weight of the edge that was used in `unite`. `ops` is the total
+number of operations. Even if `x` and `y` are connected, we would just add a single edge
+in the KRT. The eventual root will be `kidx`, which you may use to run the DFS in `solve`.
+
+#sourcefile(DSU_COLOR, "dsu/krt.cpp", showrange: (3, INFI))
+
 = Sorting
 
 == Custom `struct`/`class`
