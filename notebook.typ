@@ -457,6 +457,71 @@ Useful for dealing with systems of equations. Operations are assumed to be done 
 
 #sourcefile(MATH_COLOR, "math/matrix-tools.cpp", showrange: (3, INFI))
 
+== Hyperbola Techniques
+
+=== Mobius Function
+
+Denoted as $mu(n)$, $mu: bb(N) arrow {-1, 0, 1}$. It is defined as $0$ if $n$ is not squarefree, $1$ if it is squarefree and has an even number of prime divisors, and $-1$ if it is squarefree with an odd number of prime divisors.
+
+#sourcefile(MATH_COLOR, "math/mobius-sieve.cpp", showrange: (8, 44))
+
+=== Mobius Inversion
+
+A useful formula for computing sums of functions evaluated at divisors:
+
+$ f(n) = sum_(g | n) h(g) arrow.l.r h(n) = sum_(g | n) mu(n) f(n / g) $
+
+=== Hyperbola Technique: Normal Form
+
+Consider sums of the form $f(n) = sum_(1 <= x <= n) g(x) h(floor(n / x)) $
+
+We observe that the size of $chevron.l n chevron.r = {floor(n / x) | x in [1, n] inter bb(Z)}$ is $O(sqrt(n))$.
+
+Furthermore, $floor(n / x) = v arrow.l.r floor(n / (v + 1)) < x <= floor(n / v)$. Thus, we can compute the sum above in $O(n^(1/2))$ time using prefix sums:
+
+$ f(n) = sum_(v in chevron.l n chevron.r) h(v) (G(floor(n / v)) - G(floor(n / (v + 1)))) $
+
+In general, it is possible to compute $f(n) = sum_(1 <= x <= n) g(x) h(floor(n / x^k))$ in $O(n^(1 / (k + 1)))$ time, assuming $G(x)$ can be computed in $O(1)$. This is because the set $chevron.l n chevron.r_k = {floor(n / x^k) | x in [1, n] inter bb(Z)}$ has $O(n^(1 / (k + 1)))$ elements.
+
+#sourcefile(MATH_COLOR, "math/hypertech-normal.cpp", showrange: (10, 30))
+
+=== Hyperbola Technique: Inverse Form
+
+Now, the roles are swapped. We know $f$ but do not know $h$ in the following equation:
+
+$ f(n) = sum_(1 <= x <= n) h(floor(n / x)) $
+
+This occurs when, for instance, we try to compute the number of lattice points in the first quadrant such that $max(x, y) <= n$ that are visible from the origin (i.e., no other points lie on the line segment between this point and the origin). The number of visible lattice points is given by:
+
+$ h(n) = sum_(1 <= x <= n) sum_(1 <= y <= n, gcd(x, y) = 1) 1 $
+
+Let $f(n) = sum_(1 <= x <= n) sum_(1 <= y <= n) 1 = n^2$. Thus:
+
+$ f(n) = sum_(1 <= g <= n) sum_(1 <=x <= n) sum_(1 <= y <= n, gcd(x, y) = g) 1 $
+$ = sum_(1 <= g <= n) sum_(1 <= g x' <= n) sum_(1 <= g y' <= n, gcd(g x', g y') = g) 1 $
+$ = sum_(1 <= g <= n) sum_(1 <= x' <= n / g) sum_(1 <= y' <= n / g, gcd(x', y') = 1) 1 $
+$ = sum_(1 <= g <= n) h(n / g) $
+
+We can compute $h$ in $O(n^(3/4))$ through a DP-like process accelerated with the normal-form hyperbola technique. Note that the values of $h$ required are exactly those in $chevron.l n chevron.r$.
+
+$ h(n) = f(n) - sum_(2 <= g <= n) h(n / g) $
+
+We can do better using a sieve technique (can't implement this rn): $O(n^(2/3) (log(n))^(1/3))$
+
+The implementation is shown in the next section.
+
+=== Mertens Function
+
+One can use the identity $1(n) = sum_(1 <= g <= n) M(n / g)$ to compute the Mertens Function, the partial sum of the Mobius Function.
+
+This allows us to compute $f$ given $h$ for the following case, as follows:
+
+$ h(n) = sum_(1 <= x <= n) mu(x) f(n / x) arrow.l.r f(n) = sum_(v in chevron.l n chevron.r) h(v) [M(floor(n / v)) - M(floor(n / (v + 1)))] $
+
+Implementation is shown below:
+
+#sourcefile(MATH_COLOR, "math/hypertech-inverse.cpp", showrange: (14, 66))
+
 = Strings
 
 == String Splitting
