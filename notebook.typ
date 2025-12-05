@@ -394,6 +394,12 @@ the number of items $<= x$ within a range.
 
 #sourcefile(SEGMENT_TREE_COLOR, "segment_tree/merge_sort_tree.cpp", showrange: (3, INFI))
 
+== Li Chao Tree
+
+Stores a collection of lines. Given an x coordinate, returns the minimum y coordinate on any of the lines. In this sense, it maintains the convex hull of the lines.
+
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/li_chao_tree.cpp", showrange: (9, 90))
+
 = Convolution
 
 == Number Theoretic Transform
