@@ -445,6 +445,12 @@ May be helpful for matrix multiplication problems.
 
 #sourcefile(MATH_COLOR, "math/matrix.cpp", showrange: (3, INFI))
 
+== Linear Algebra
+
+Useful for dealing with systems of equations. Operations are assumed to be done in modulo $p$. Formally, operands are elements of $M_(i times j) (bb(Z) slash p bb(Z))$.
+
+#sourcefile(MATH_COLOR, "math/matrix-tools.cpp", showrange: (3, INFI))
+
 = Strings
 
 == String Splitting
