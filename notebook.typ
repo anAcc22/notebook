@@ -51,6 +51,21 @@ Most snippets assume the following macros.
 
 #sourcefile(INTRODUCTION_COLOR, "templates/baytoro_template.cpp", showrange: (1, 9))
 
+== Compilation
+
+For convenience, in the `.bashrc`, you may want to define
+```bash
+alias g='compile_and_run_cpp'
+```
+
+where `compile_and_run_cpp` is defined as:
+
+```bash
+compile_and_run_cpp() {
+    g++ -fsanitize=undefined -std=c++23 -Werror=uninitialized -Winvalid-pch -Wall -Wextra -o out "$1" && ./out
+}
+```
+
 == I/O
 
 For large inputs, it may be necessary to enable fast I/O.
