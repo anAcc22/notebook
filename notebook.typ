@@ -551,6 +551,27 @@ the points in clockwise order, you need to reverse the output to get it in antic
 
 #sourcefile(MATH_COLOR, "math/convex_hull.cpp", showrange: (3, INFI))
 
+=== Various Geometry Tools
+
+The tools include ways to manipulate and process vectors, such as vector addition, subtraction, dot products, cross products, projection, reflection, rotation, collinear checks, perpendicularity checks, counterclockwise and clockwise checks, and angle computations.
+
+It also includes some basic tools to handle polygons with lattice point coordinates, such as area computations, boundary point counters, and interior point counters.
+
+Some useful formulas:
+
+
+$ "Refl"_(arrow(u))^(-1) (arrow(x)) = chevron.l arrow(u) dot arrow(x), arrow(u) times arrow(x) chevron.r $
+
+$ "45-degree Rotation (CCW) with scaling: " (x, y) arrow (x - y, x + y) $
+
+$ "45-degree Rotation (CW) with scaling: " (x, y) arrow (x + y, x - y) $
+
+$ "Pick's Theorem: " A = I + B / 2 - 1 $
+
+In the future, try adding line/line intersections, line/circle intersections, subspace intersections, and the like.
+
+#sourcefile(MATH_COLOR, "math/geometry_tools.cpp", showrange: (36, 202))
+
 = Strings
 
 == String Splitting
