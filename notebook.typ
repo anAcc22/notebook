@@ -473,11 +473,11 @@ $ f(n) = sum_(g | n) h(g) arrow.l.r h(n) = sum_(g | n) mu(n) f(n / g) $
 
 === Hyperbola Technique: Normal Form
 
-Consider sums of the form $f(n) = sum_(1 <= x <= n) g(x) h(floor(n / x)) $
+Consider sums of the form $f(n) = sum_(1 <= x <= n) g(x) h(floor(n / x))$.
 
 We observe that the size of $chevron.l n chevron.r = {floor(n / x) | x in [1, n] inter bb(Z)}$ is $O(sqrt(n))$.
 
-Furthermore, $floor(n / x) = v arrow.l.r floor(n / (v + 1)) < x <= floor(n / v)$. Thus, we can compute the sum above in $O(n^(1/2))$ time using prefix sums:
+Furthermore, $floor(n / x) = v arrow.l.r floor(n / (v + 1)) < x <= floor(n / v)$. Thus, we can compute the sum above in $O(n^(1 / 2))$ time using prefix sums:
 
 $ f(n) = sum_(v in chevron.l n chevron.r) h(v) (G(floor(n / v)) - G(floor(n / (v + 1)))) $
 
@@ -502,11 +502,11 @@ $ = sum_(1 <= g <= n) sum_(1 <= g x' <= n) sum_(1 <= g y' <= n, gcd(g x', g y') 
 $ = sum_(1 <= g <= n) sum_(1 <= x' <= n / g) sum_(1 <= y' <= n / g, gcd(x', y') = 1) 1 $
 $ = sum_(1 <= g <= n) h(n / g) $
 
-We can compute $h$ in $O(n^(3/4))$ through a DP-like process accelerated with the normal-form hyperbola technique. Note that the values of $h$ required are exactly those in $chevron.l n chevron.r$.
+We can compute $h$ in $O(n^(3 / 4))$ through a DP-like process accelerated with the normal-form hyperbola technique. Note that the values of $h$ required are exactly those in $chevron.l n chevron.r$.
 
 $ h(n) = f(n) - sum_(2 <= g <= n) h(n / g) $
 
-We can do better using a sieve technique (can't implement this rn): $O(n^(2/3) (log(n))^(1/3))$
+We can do better using a sieve technique (can't implement this rn): $O(n^(2 / 3) (log(n))^(1 / 3))$
 
 The implementation is shown in the next section.
 
@@ -521,6 +521,20 @@ $ h(n) = sum_(1 <= x <= n) mu(x) f(n / x) arrow.l.r f(n) = sum_(v in chevron.l n
 Implementation is shown below:
 
 #sourcefile(MATH_COLOR, "math/hypertech-inverse.cpp", showrange: (14, 66))
+
+== Geometry
+
+=== Convex Hull
+
+The convex hull is the _smallest convex polygon_ that contains all the given points. This
+implementation uses the monotone chain algorithm, i.e., find the leftmost and rightmost points.
+If multiple points are found, take the lowest of the left and the highest of the right. Draw a line
+connecting the two points to split it into two sets, before constructing an upper and lower hull.
+
+You need to remember to remove duplicate points in the input! Because this implementation yields
+the points in clockwise order, you need to reverse the output to get it in anticlockwise order.
+
+#sourcefile(MATH_COLOR, "math/convex_hull.cpp", showrange: (3, INFI))
 
 = Strings
 
