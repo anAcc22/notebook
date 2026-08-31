@@ -96,6 +96,26 @@ struct Tree {
     void upd(ll ql, ll qr, const U& updfn) {
         _upd(1ll, 0ll, n - 1ll, ql, qr, updfn);
     }
+
+    void _upd_one(ll i, ll l, ll r, ll qi, const T& nv) {
+        push(i, l, r);
+ 
+        if(l == r) {
+            // lazy[i] = lazy[i] + updfn;
+            v[i] = nv;
+            return;
+        }
+        ll m = (l + r) >> 1ll;
+ 
+        if(qi <= m) _upd_one(i << 1ll, l, m, qi, nv);
+        else _upd_one((i << 1ll) | 1ll, m + 1ll, r, qi, nv);
+ 
+        v[i] = v[i << 1ll] + v[(i << 1ll) | 1ll];
+    }
+ 
+    void upd_one(ll qi, const T& nv) {
+        _upd_one(1ll, 0ll, n - 1ll, qi, nv);
+    }
 };
 
 
