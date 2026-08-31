@@ -366,35 +366,39 @@ It can help to avoid TLE in certain situations.
 
 #sourcefile(SEGMENT_TREE_COLOR, "segment_tree/rmq_iterative.cpp", showrange: (3, INFI))
 
-== RMQ (Recursive)
+== RMQ (Recursive, Monoidal)
 
-#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/rmq_recursive.cpp", showrange: (3, INFI))
+See the Lazy Propagation section for more examples of monoids.
 
-== Lazy Propagation
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/monoidal_segtree.cpp", showrange: (3, INFI))
+
+== Lazy Propagation (Default: Range Add+Min Query)
+
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/monoidal_lazy_segtree.cpp", showrange: (3, INFI))
 
 === Range Addition/Assignment (Min Query)
 
-#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/lazy_min.cpp", showrange: (3, INFI))
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/monoids_and_update_strategies/range_add_assign_minq.cpp", showrange: (3, INFI))
 
 === Range Addition/Assignment (Sum Query)
 
-#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/lazy_sum.cpp", showrange: (3, INFI))
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/monoids_and_update_strategies/range_add_assign_sumq.cpp", showrange: (3, INFI))
 
 === Range Addition/Multiplication (Sum Query)
 
-#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/lazy_add_multiply.cpp", showrange: (85, INFI))
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/monoids_and_update_strategies/range_add_mult_sumq_mod.cpp", showrange: (3, INFI))
 
 === Polynomial Queries
 
 Add `[base, base+1, base+2, ...]` to the range `[l, r]`.
 
-#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/polynomial.cpp", showrange: (3, INFI))
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/monoids_and_update_strategies/polynomial_queries.cpp", showrange: (3, INFI))
 
-=== Range Addition (Count Minimums)
+=== Range Addition/Assignment (Count Minimums)
 
 `query` returns the minimum value in a range, as well as the corresponding count.
 
-#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/range_add_count_minimums.cpp", showrange: (3, INFI))
+#sourcefile(SEGMENT_TREE_COLOR, "segment_tree/monoids_and_update_strategies/range_add_assign_minfreqq.cpp", showrange: (3, INFI))
 
 == Persistent Segment Tree
 
@@ -490,13 +494,13 @@ $ f(n) = sum_(g | n) h(g) arrow.l.r h(n) = sum_(g | n) mu(n) f(n / g) $
 
 Consider sums of the form $f(n) = sum_(1 <= x <= n) g(x) h(floor(n / x))$.
 
-We observe that the size of $chevron.l n chevron.r = {floor(n / x) | x in [1, n] inter bb(Z)}$ is $O(sqrt(n))$.
+We observe that the size of $angle.l n angle.r = {floor(n / x) | x in [1, n] inter bb(Z)}$ is $O(sqrt(n))$.
 
 Furthermore, $floor(n / x) = v arrow.l.r floor(n / (v + 1)) < x <= floor(n / v)$. Thus, we can compute the sum above in $O(n^(1 / 2))$ time using prefix sums:
 
-$ f(n) = sum_(v in chevron.l n chevron.r) h(v) (G(floor(n / v)) - G(floor(n / (v + 1)))) $
+$ f(n) = sum_(v in angle.l n angle.r) h(v) (G(floor(n / v)) - G(floor(n / (v + 1)))) $
 
-In general, it is possible to compute $f(n) = sum_(1 <= x <= n) g(x) h(floor(n / x^k))$ in $O(n^(1 / (k + 1)))$ time, assuming $G(x)$ can be computed in $O(1)$. This is because the set $chevron.l n chevron.r_k = {floor(n / x^k) | x in [1, n] inter bb(Z)}$ has $O(n^(1 / (k + 1)))$ elements.
+In general, it is possible to compute $f(n) = sum_(1 <= x <= n) g(x) h(floor(n / x^k))$ in $O(n^(1 / (k + 1)))$ time, assuming $G(x)$ can be computed in $O(1)$. This is because the set $angle.l n angle.r_k = {floor(n / x^k) | x in [1, n] inter bb(Z)}$ has $O(n^(1 / (k + 1)))$ elements.
 
 #sourcefile(MATH_COLOR, "math/hypertech-normal.cpp", showrange: (10, 30))
 
@@ -517,7 +521,7 @@ $ = sum_(1 <= g <= n) sum_(1 <= g x' <= n) sum_(1 <= g y' <= n, gcd(g x', g y') 
 $ = sum_(1 <= g <= n) sum_(1 <= x' <= n / g) sum_(1 <= y' <= n / g, gcd(x', y') = 1) 1 $
 $ = sum_(1 <= g <= n) h(n / g) $
 
-We can compute $h$ in $O(n^(3 / 4))$ through a DP-like process accelerated with the normal-form hyperbola technique. Note that the values of $h$ required are exactly those in $chevron.l n chevron.r$.
+We can compute $h$ in $O(n^(3 / 4))$ through a DP-like process accelerated with the normal-form hyperbola technique. Note that the values of $h$ required are exactly those in $angle.l n angle.r$.
 
 $ h(n) = f(n) - sum_(2 <= g <= n) h(n / g) $
 
@@ -531,7 +535,7 @@ One can use the identity $1(n) = sum_(1 <= g <= n) M(n / g)$ to compute the Mert
 
 This allows us to compute $f$ given $h$ for the following case, as follows:
 
-$ h(n) = sum_(1 <= x <= n) mu(x) f(n / x) arrow.l.r f(n) = sum_(v in chevron.l n chevron.r) h(v) [M(floor(n / v)) - M(floor(n / (v + 1)))] $
+$ h(n) = sum_(1 <= x <= n) mu(x) f(n / x) arrow.l.r f(n) = sum_(v in angle.l n angle.r) h(v) [M(floor(n / v)) - M(floor(n / (v + 1)))] $
 
 Implementation is shown below:
 
@@ -560,7 +564,7 @@ It also includes some basic tools to handle polygons with lattice point coordina
 Some useful formulas:
 
 
-$ "Refl"_(arrow(u))^(-1) (arrow(x)) = chevron.l arrow(u) dot arrow(x), arrow(u) times arrow(x) chevron.r $
+$ "Refl"_(arrow(u))^(-1) (arrow(x)) = angle.l arrow(u) dot arrow(x), arrow(u) times arrow(x) angle.r $
 
 $ "45-degree Rotation (CCW) with scaling: " (x, y) arrow (x - y, x + y) $
 

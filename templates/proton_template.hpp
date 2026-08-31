@@ -17,28 +17,3 @@ typedef vector<bool> vb;
 #define pb push_back
 #define INF(dt) numeric_limits<dt>::max()
 #define NINF(dt) numeric_limits<dt>::min()
-
-struct Debug {
-    ll t;
-    Debug(): t(0ll) {};
-
-    void log() {
-        cerr << "! " << ++t << endl;
-    }
-};
-
-Debug debug;
-
-template<typename T>
-void printv(const vector<T>& a) {
-    for(T v : a) {
-        cerr << v << " ";
-    }
-    cerr << endl;
-}
-
-int main() {
-  cin.tie(nullptr)->sync_with_stdio(false);
-
-  return 0;
-}
