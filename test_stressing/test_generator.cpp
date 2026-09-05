@@ -1,7 +1,7 @@
-//1. In the main solution file, read input from [task].inp 
+//1. In the main solution, read input from [task].inp 
 //and write output to [task].out
-//2. Name the check solution file as check.cpp and compile it to check.exe
-//3. In the check solution file, read input from [task].inp 
+//2. Name the baseline solution file as check.cpp and compile it to check.exe
+//3. In the baseline solution, read input from [task].inp 
 //and write output to [task].ans
 //4. Works only on Windows. To run on Linux,
 //change the system commands in check() function:
