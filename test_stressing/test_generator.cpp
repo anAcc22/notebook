@@ -1,4 +1,12 @@
-//In the main solution file, read input from [task].inp and write output to [task].out
+//1. In the main solution file, read input from [task].inp 
+//and write output to [task].out
+//2. Name the check solution file as check.cpp and compile it to check.exe
+//3. In the check solution file, read input from [task].inp 
+//and write output to [task].ans
+//4. Works only on Windows. To run on Linux,
+//change the system commands in check() function:
+//4.1. from "fc" to "diff"
+//4.2. from "check.exe" to "./check"
 #include <bits/stdc++.h>
 using namespace std;
 
